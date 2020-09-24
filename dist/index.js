@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const app = express_1.default();
 //port definition
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 const index_1 = __importDefault(require("./routes/index"));
 //middlewares
 app.use(express_1.default.json());
