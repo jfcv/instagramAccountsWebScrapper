@@ -11,6 +11,7 @@ const index_1 = __importDefault(require("./routes/index"));
 //middlewares
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
+//routes
 app.use(index_1.default);
 app.listen(port, () => {
     console.log('Server running on port ,', port);
