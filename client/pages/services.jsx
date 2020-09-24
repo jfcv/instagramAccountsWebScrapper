@@ -1,11 +1,10 @@
-import Navigation from '../components/navigation'
+import Container from '../components/container'
 
 const Services = () => {
     return (
-        <div>
-            <Navigation />
+        <Container title={'Next.js Project - Services'}>
             <h1>Services</h1>
-        </div>
+        </Container>
     )
 }
 

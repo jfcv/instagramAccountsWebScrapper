@@ -1,11 +1,10 @@
-import Navigation from '../components/navigation'
+import Container from '../components/container'
 
 const Index = () => {
     return (
-        <div>
-            <Navigation />
+        <Container title={'Next.js Project - Home'}>
             <h1>Hello World</h1>
-        </div>
+        </Container>
     )
 }
 

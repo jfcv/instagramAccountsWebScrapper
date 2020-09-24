@@ -1,11 +1,10 @@
-import Navigation from '../components/navigation'
+import Container from '../components/container'
 
 const About = () => {
     return (
-        <div>
-            <Navigation />
+        <Container title={'Next.js Project - About'}>
             <h1>About</h1>
-        </div>
+        </Container>
     )
 }
 
