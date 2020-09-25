@@ -13,7 +13,7 @@ const Container = (props) => {
             
             <Navigation />
 
-            <div className="container p-5 mt-5">
+            <div className="container p-5 mt-4">
                 {props.children}
             </div>
 
