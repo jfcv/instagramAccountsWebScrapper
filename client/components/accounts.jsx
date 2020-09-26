@@ -1,9 +1,9 @@
 
-const Accounts = (props) => {
+const Accounts = ({accounts}) => {
     return (
         <ul className="mt-4">
             {
-                props.accounts.map(account => (
+                accounts.map(account => (
                 <li className="list-group-item list-group-item-action" key={account.id}>
                     <h5>{account.id} - {account.account}</h5>
                 </li>
