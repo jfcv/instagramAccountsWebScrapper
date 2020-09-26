@@ -1,6 +1,8 @@
 import Container from '../components/container'
-import axios from 'axios'
 import Accounts from '../components/accounts'
+
+import axios from 'axios'
+const url = 'http://localhost:5000/accounts'
 
 const Index = ({accounts}) => {
 
@@ -15,15 +17,17 @@ const Index = ({accounts}) => {
     )
 }
 
-const url = 'http://localhost:5000/accounts'
-
-Index.getInitialProps = async (ctx) => {
+export async function getStaticProps(ctx) {
     try {
         const response = await axios.get(url);
-        return {accounts: response.data}
+        return {
+            props: {
+                accounts: response.data
+            },
+        }
     } catch (err) {
         console.error(err);
-    }    
+    }
 }
 
 export default Index
