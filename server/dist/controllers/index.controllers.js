@@ -23,13 +23,12 @@ exports.getAccounts = (req, res) => __awaiter(void 0, void 0, void 0, function* 
 });
 exports.addAccount = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { account } = req.body;
-        const response = yield database_1.pool.query('INSERT INTO accounts (account) VALUES ($1)', [account]);
+        let { account } = req.body;
+        yield database_1.pool.query('INSERT INTO accounts (account) VALUES ($1)', [account]);
+        const lastAccount = yield database_1.pool.query('SELECT * FROM accounts WHERE id = (SELECT MAX(id) FROM accounts)');
         return res.json({
             message: 'account added successfully',
-            body: {
-                account
-            }
+            body: lastAccount.rows[0]
         });
     }
     catch (err) {

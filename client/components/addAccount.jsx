@@ -1,6 +1,6 @@
-import {useState} from 'react'
+import axios from 'axios';
 
-const AddAccount = ({accounts, setAccounts}) => {
+const AddAccount = ({accounts, setAccounts, url}) => {
 
     const onChange = (e) => {
         setAccounts({
@@ -17,17 +17,17 @@ const AddAccount = ({accounts, setAccounts}) => {
 
     const onSubmitForm = async (e) => {
         
-        e.preventDefault();
-
         try {
+            e.preventDefault();
             if(accounts.url !== '') {
+                const response = await axios.post(url,{account: accounts.url});
                 setAccounts({
-                    data: [...accounts.data, {account: accounts.url}],
+                    data: [...accounts.data, response.data.body],
                     url: ''
                 });
                 handleReset();
             } else {
-                console.log('empty form');
+                console.log('Empty form ! Fill it out !');
             }
         } catch (err) {
             console.error(err.message);
@@ -36,15 +36,13 @@ const AddAccount = ({accounts, setAccounts}) => {
     }
 
     return (
-        <form className="d-flex flex-column mt-5">
-            
+        <form className="d-flex flex-column mt-5" onSubmit={onSubmitForm}>
             <input 
                 id="inputText"
                 type="text" 
                 className="form-control" 
                 onChange={onChange}
             />
-
             <button 
                 type="button" 
                 className="btn btn-outline-primary mt-2"
@@ -52,9 +50,7 @@ const AddAccount = ({accounts, setAccounts}) => {
             >
                 Add Account
             </button>
-
         </form>
-
     )
 }
 

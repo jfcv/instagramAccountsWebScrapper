@@ -19,7 +19,7 @@ const Index = (props) => {
 
             <h1 className="text-center">Instagram Accounts Currently Following</h1>
 
-            <AddAccount accounts={accounts} setAccounts={setAccounts} />
+            <AddAccount accounts={accounts} setAccounts={setAccounts} url={url} />
 
             <Accounts accounts={accounts.data} />
 

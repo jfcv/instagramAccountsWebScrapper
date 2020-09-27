@@ -15,13 +15,12 @@ export const getAccounts = async (req: Request, res: Response): Promise<Response
 
 export const addAccount = async (req: Request, res: Response): Promise<Response> => {
     try {
-        const {account} = req.body;
-        const response: QueryResult = await pool.query('INSERT INTO accounts (account) VALUES ($1)', [account]);
+        let {account} = req.body;
+        await pool.query('INSERT INTO accounts (account) VALUES ($1)', [account]);
+        const lastAccount: QueryResult = await pool.query('SELECT * FROM accounts WHERE id = (SELECT MAX(id) FROM accounts)');
         return res.json({
             message: 'account added successfully',
-            body: {
-                account
-            }
+            body: lastAccount.rows[0]
         })
     } catch (err) {
         console.error(err);

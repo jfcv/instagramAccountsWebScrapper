@@ -6,5 +6,5 @@ CREATE TABLE accounts(
 );
 
 INSERT INTO accounts (account)
-    VALUES  ('https://www.instagram.com/juliojaramilloo/?hl=es-la'),
-            ('https://www.instagram.com/juanes/?hl=es-la');
+    VALUES  ('https://www.instagram.com/juliojaramilloo/?hl=es-la');
+            
