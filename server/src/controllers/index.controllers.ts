@@ -3,6 +3,9 @@ import {QueryResult} from 'pg'
 
 import {pool} from '../database'
 
+require('dotenv').config();
+import sgMail from '@sendgrid/mail';
+
 export const getAccounts = async (req: Request, res: Response): Promise<Response> => {
     try{
         const response: QueryResult = await pool.query('SELECT * FROM accounts');
@@ -25,5 +28,23 @@ export const addAccount = async (req: Request, res: Response): Promise<Response>
     } catch (err) {
         console.error(err);
         return res.json('error');  
+    }
+}
+
+export const sendMail = async (req: Request, res: Response): Promise<Response> => {
+    try {
+        sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
+        const msg = {
+        to: 'velveet@protonmail.com',
+        from: 'velveet@protonmail.com',
+        subject: 'Sending with Twilio SendGrid is Fun',
+        text: 'and easy to do anywhere, even with Node.js',
+        html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+        };
+        await sgMail.send(msg);
+        return res.json('mail sent successfully'); 
+    } catch (err) {
+        console.error(err);
+        return res.json('Mail service not working !');  
     }
 }

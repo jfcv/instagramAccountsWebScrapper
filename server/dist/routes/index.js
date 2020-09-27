@@ -5,4 +5,5 @@ const router = express_1.Router();
 const index_controllers_1 = require("../controllers/index.controllers");
 router.get('/accounts', index_controllers_1.getAccounts);
 router.post('/accounts', index_controllers_1.addAccount);
+router.post('/mail', index_controllers_1.sendMail);
 exports.default = router;
