@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.sendMail = exports.addAccount = exports.getAccounts = void 0;
 const database_1 = require("../database");
 require('dotenv').config();
+const nodemailer = require("nodemailer");
 exports.getAccounts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const response = yield database_1.pool.query('SELECT * FROM accounts');
@@ -38,21 +39,37 @@ exports.addAccount = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     }
 });
 exports.sendMail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    //script for web scrapping that web page & getting the right info
+    //output variables ACCOUNT NAME, PUBLICATIONS, FOLLOWERS, FOLLOWING
+    //concatenate values && send them to the mail
+    //find an alternative to sendgrid that allows to REALLY received the mail 
     try {
         console.log(req.body);
-        /*         sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
-                const msg = {
-                to: 'velveet@protonmail.com',
-                from: 'velveet@protonmail.com',
-                subject: 'Sending with Twilio SendGrid is Fun',
-                text: 'and easy to do anywhere, even with Node.js',
-                html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-                };
-                await sgMail.send(msg); */
-        return res.json('mail sent successfully');
+        const { account } = req.body;
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.EMAIL,
+                pass: process.env.PASSWORD
+            }
+        });
+        const mailOptions = {
+            from: process.env.EMAIL,
+            to: process.env.EMAIL,
+            subject: 'Testing Ethereal + Nodemailer e-mailing service',
+            text: 'This is the ' + account + ' we are currently tracking!'
+        };
+        const info = yield transporter.sendMail(mailOptions);
+        return res.json({
+            message: 'Mail sent successfully',
+            body: info
+        });
     }
     catch (err) {
         console.error(err);
-        return res.json('Mail service not working !');
+        return res.json({
+            message: 'Mail service not working !',
+            body: err
+        });
     }
 });

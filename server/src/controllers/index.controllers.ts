@@ -4,7 +4,7 @@ import {QueryResult} from 'pg'
 import {pool} from '../database'
 
 require('dotenv').config();
-import sgMail from '@sendgrid/mail';
+const nodemailer = require("nodemailer");
 
 export const getAccounts = async (req: Request, res: Response): Promise<Response> => {
     try{
@@ -32,23 +32,48 @@ export const addAccount = async (req: Request, res: Response): Promise<Response>
 }
 
 export const sendMail = async (req: Request, res: Response): Promise<Response> => {
+
+        //script for web scrapping that web page & getting the right info
+
+        //output variables ACCOUNT NAME, PUBLICATIONS, FOLLOWERS, FOLLOWING
+
+        //concatenate values && send them to the mail
+
+        //find an alternative to sendgrid that allows to REALLY received the mail 
+
     try {
 
         console.log(req.body);
-        
-/*         sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
-        const msg = {
-        to: 'velveet@protonmail.com',
-        from: 'velveet@protonmail.com',
-        subject: 'Sending with Twilio SendGrid is Fun',
-        text: 'and easy to do anywhere, even with Node.js',
-        html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-        };
-        await sgMail.send(msg); */
 
-        return res.json('mail sent successfully'); 
+        const {account} = req.body;
+
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.EMAIL,
+                pass: process.env.PASSWORD
+            }
+        });
+
+        const mailOptions = {
+            from: process.env.EMAIL,
+            to: process.env.EMAIL,
+            subject: 'Testing Ethereal + Nodemailer e-mailing service',
+            text: 'This is the ' + account + ' we are currently tracking!'
+        }
+
+        const info = await transporter.sendMail(mailOptions);
+
+        return res.json({
+            message: 'Mail sent successfully',
+            body: info
+        }); 
+
     } catch (err) {
         console.error(err);
-        return res.json('Mail service not working !');  
+        return res.json({
+            message: 'Mail service not working !',
+            body: err
+        });  
     }
 }
