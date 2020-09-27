@@ -15,7 +15,7 @@ exports.mailOptions = (account) => {
         from: process.env.EMAIL,
         to: process.env.EMAIL,
         subject: 'Testing Ethereal + Nodemailer e-mailing service',
-        text: 'This is the ' + account + ' we are currently tracking!'
+        text: 'This is the account: ' + account + ' we are currently tracking!'
     };
     return mailOptions;
 };

@@ -5,7 +5,6 @@ const Accounts = ({accounts}) => {
     const onTrack = async (e) => {
         try {
             e.preventDefault();
-            console.log(document.getElementById('accountUrl').innerText);
             const accountUrl = document.getElementById('accountUrl').innerText;
             const response = await axios.post('http://localhost:5000/mail',{account: accountUrl});
             console.log(response.data);
