@@ -33,7 +33,10 @@ export const addAccount = async (req: Request, res: Response): Promise<Response>
 
 export const sendMail = async (req: Request, res: Response): Promise<Response> => {
     try {
-        sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
+
+        console.log(req.body);
+        
+/*         sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
         const msg = {
         to: 'velveet@protonmail.com',
         from: 'velveet@protonmail.com',
@@ -41,7 +44,8 @@ export const sendMail = async (req: Request, res: Response): Promise<Response> =
         text: 'and easy to do anywhere, even with Node.js',
         html: '<strong>and easy to do anywhere, even with Node.js</strong>',
         };
-        await sgMail.send(msg);
+        await sgMail.send(msg); */
+
         return res.json('mail sent successfully'); 
     } catch (err) {
         console.error(err);
