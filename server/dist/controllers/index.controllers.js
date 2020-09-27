@@ -11,8 +11,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.sendMail = exports.addAccount = exports.getAccounts = void 0;
 const database_1 = require("../database");
-/* require('dotenv').config();
-const nodemailer = require("nodemailer"); */
 const transporter_1 = require("./transporter");
 exports.getAccounts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {

@@ -3,9 +3,6 @@ import {QueryResult} from 'pg'
 
 import {pool} from '../database'
 
-/* require('dotenv').config();
-const nodemailer = require("nodemailer"); */
-
 import {transporter, mailOptions} from './transporter';
 
 export const getAccounts = async (req: Request, res: Response): Promise<Response> => {
