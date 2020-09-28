@@ -33,7 +33,9 @@ export const addAccount = async (req: Request, res: Response): Promise<Response>
 }
 
 export const sendMail = async (req: Request, res: Response): Promise<Response> => {
+
     try {
+        /* request parameters */
         const {account} = req.body;
 
         /* puppeteer code */
@@ -41,10 +43,8 @@ export const sendMail = async (req: Request, res: Response): Promise<Response> =
         const page = await browser.newPage();
         await page.goto(account);
         await page.waitForSelector('.zwlfE');
-
         /* account name */
         const name = await page.$eval('.zwlfE div.nZSzR h2', (h2: any) => h2.innerText);
-
         /* account stats -> [ publications | followers | followed ] */
         let statsArr = [];
         const lis = await page.$$('ul.k9GMp li');
@@ -52,7 +52,6 @@ export const sendMail = async (req: Request, res: Response): Promise<Response> =
             const result = await li.$eval('li.Y8-fY a.-nal3 span.g47SY', (span: any) => span.innerText);
             statsArr.push(result);
         }
-
         await browser.close();
         
         const mailOptionsObj = mailOptions(account, name, statsArr);
@@ -68,4 +67,5 @@ export const sendMail = async (req: Request, res: Response): Promise<Response> =
             body: err
         });  
     }
+
 }

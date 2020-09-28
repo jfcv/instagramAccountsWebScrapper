@@ -40,6 +40,7 @@ exports.addAccount = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 });
 exports.sendMail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        /* request parameters */
         const { account } = req.body;
         /* puppeteer code */
         const browser = yield puppeteer.launch({ headless: true });

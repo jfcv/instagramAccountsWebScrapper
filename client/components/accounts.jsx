@@ -17,9 +17,16 @@ const Accounts = ({accounts}) => {
                             onClick={async (e) => {
                                     try {
                                         e.preventDefault();
+                                        const MILISECS = 1000;
+                                        const SECONDS = 60;
+                                        const MINUTES = 1;
+                                        const REPORT_PERIOD = MINUTES * SECONDS * MILISECS;
+                                        
                                         const accountUrl = document.getElementById(`accountUrl/${account.id}`).innerText;
-                                        const response = await axios.post('http://localhost:5000/mail',{account: accountUrl});
-                                        console.log(response.data);
+                                        setInterval(async () => {
+                                            const response = await axios.post('http://localhost:5000/mail',{account: accountUrl});
+                                            console.log(response.data);
+                                        }, REPORT_PERIOD);
                                     } catch (err) {
                                         console.error(err.message);
                                     }
