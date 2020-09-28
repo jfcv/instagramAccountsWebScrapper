@@ -10,12 +10,13 @@ exports.transporter = nodemailer.createTransport({
         pass: process.env.PASSWORD
     }
 });
-exports.mailOptions = (account) => {
+exports.mailOptions = (account, name, statsArr) => {
     const mailOptions = {
         from: process.env.EMAIL,
         to: process.env.EMAIL,
-        subject: 'Testing Ethereal + Nodemailer e-mailing service',
-        text: 'This is the account: ' + account + ' we are currently tracking!'
+        subject: 'Scrapprtup Daily Report!',
+        text: 'Dear customer, we are currently tracking the account: ' + name + '. It has ' + statsArr[0] + ' publications, ' + statsArr[1] + ' account followers '
+            + ' & ' + statsArr[2] + ' accounts followed.' + ' If you want to access to this account click on the following link: ' + account + ' Have a nice day Scrapprter!'
     };
     return mailOptions;
 };

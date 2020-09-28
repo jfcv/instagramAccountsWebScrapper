@@ -21,10 +21,12 @@
   },
   "dependencies": {
     "@sendgrid/mail": "^7.2.6",
+    "@types/puppeteer": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "nodemailer": "^6.4.11",
-    "pg": "^8.3.3"
+    "pg": "^8.3.3",
+    "puppeteer": "^5.3.1"
   }
 }
