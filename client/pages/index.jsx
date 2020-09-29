@@ -32,11 +32,18 @@ export async function getStaticProps(ctx) {
         const response = await axios.get(url);
         return {
             props: {
-                accounts: response.data
+                accounts: response.data,
+                error: false
             },
         }
     } catch (err) {
         console.error(err.message);
+        return {
+            props: {
+                accounts: '',
+                error: true
+            },
+        }
     }
 }
 

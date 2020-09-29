@@ -3,3 +3,6 @@ node_modules/
 
 #sendgrid KEY's 
 .env
+
+#DB Configuration
+dbConfig.txt

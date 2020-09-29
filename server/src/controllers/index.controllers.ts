@@ -8,7 +8,7 @@ import {transporter, mailOptions} from './transporter';
 const puppeteer = require('puppeteer');
 
 export const getAccounts = async (req: Request, res: Response): Promise<Response> => {
-    try{
+    try{        
         const response: QueryResult = await pool.query('SELECT * FROM accounts');
         return res.json(response.rows);
     } catch(err) {
